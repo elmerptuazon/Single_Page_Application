@@ -1,0 +1,80 @@
+<script id="navbar" type="text/html">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-fixed-top">
+     	<a class="navbar-brand" href="#/login" id="showTitle">Login</a>
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	        <ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#/add_student" id="showAdd">Add Student</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="#/delete_student" id="showUpdate">Delete</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="#/register_teacher" id="showDelete">Register Teacher</a>
+				</li>
+	        </ul>
+	    </div>
+    </nav>
+</script>
+
+
+<script id="login" type="text/html">
+	<form method="post">
+		<div class="form-group">
+			<label>Username:</label>
+			<input type="text" class="form-control" id="loginusername" name="loginusername">
+		</div>
+		<div class="form-group">
+			<label>Password:</label>
+			<input type="password" class="form-control" id="loginpassword" name="loginpassword">
+		</div>
+			<button type="submit" id="SubmitLogin" class="btn btn-default">Validate</button>
+	</form>
+</script>
+
+<script id="add_student" type="text/html">
+	<form method="post">
+		<div class="form-group">
+			<label>Fullname:</label>
+			<input type="text" class="form-control" id="add_studentfullname" name="add_studentfullname">
+		</div>
+		<div class="form-group">
+			<label>Username:</label>
+			<input type="text" class="form-control" id="add_studentusername" name="add_studentusername">
+		</div>
+		<div class="form-group">
+			<label>Password:</label>
+			<input type="password" class="form-control" id="add_studentpassword" name="add_studentpassword">
+		</div>
+			<button type="submit" id="SubmitAddStudent" class="btn btn-default">Submit</button>
+	</form>
+</script>
+
+<script id="delete_student" type="text/html">
+	<form method="post">
+		<div class="form-group">
+			<label>Username:</label>
+			<input type="text" class="form-control" id="delete_studentusername" name="delete_studentusername">
+		</div>
+			<button type="submit" id="SubmitDeleteStudent" class="btn btn-default">Submit</button>
+	</form>
+</script>
+
+<script id="register_teacher" type="text/html">
+	<form method="post">
+		<div class="form-group">
+			<label>Teacher's Fullname:</label>
+			<input type="text" class="form-control" id="register_teachfullname" name="register_teachfullname">
+		</div>
+		<div class="form-group">
+			<label>Teacher's Username:</label>
+			<input type="text" class="form-control" id="register_teachusername" name="register_teachusername">
+		</div>
+		<div class="form-group">
+			<label>Teacher's Password:</label>
+			<input type="password" class="form-control" id="register_teachpassword" name="register_teachpassword">
+		</div>
+			<button type="submit" id="SubmitRegisterTeacher" class="btn btn-default">Submit</button>
+	</form>
+</script>
+
