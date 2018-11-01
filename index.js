@@ -6,26 +6,12 @@ $.Mustache.load('template/template.html').done(function() {
 	}
 
 	Path.map('#/login').to(function() {
-		$('#canvas').mustache('login');		
+		$('#canvas').mustache('login');		``
 	}).exit(transition);
 
 	Path.map('#/add_student').to(function() {
 		$('#canvas').mustache('add_student');
 		
-		$('#SubmitAddStudent').on('click', function(e) {
-			e.preventDefault();
-			$.ajax({
-				method: 'post',
-				url: 'index.php',
-				success: function(response) {
-					var obj = JSON.parse(response);
-					alert(obj.getconn);
-				},
-				statusCode: {
-					404: () => {alert('Error')}
-				}
-			});
-		});
 	}).exit(transition);
 
 	Path.map('#/delete_student').to(function() {
@@ -33,7 +19,29 @@ $.Mustache.load('template/template.html').done(function() {
 	}).exit(transition);
 
 	Path.map('#/register_teacher').to(function() {
-		$('#canvas').mustache('register_teacher');		
+		$('#canvas').mustache('register_teacher');	
+
+		$('#SubmitRegisterTeacher').on('click', function(e) {
+			e.preventDefault();
+
+			var fullname = $('#register_teacherfullname').val();
+			var username = $('#register_teacherusername').val();
+			var password = $('#register_teacherpassword').val();
+			var id = $('#register_teacherid').val();
+
+			$.ajax({
+				method: 'post',
+				data: {
+					fullname: fullname,
+					username: username,
+					password: password
+				},
+				url: 'includes/register_teacher.php',
+				success: function(response) {
+					alert(response)
+				}
+			});
+		});	
 	}).exit(transition);
 
 	Path.root('#/login')
