@@ -6,7 +6,27 @@ $.Mustache.load('template/template.html').done(function() {
 	}
 
 	Path.map('#/login').to(function() {
-		$('#canvas').mustache('login');		``
+		$('#canvas').mustache('login');
+
+		$('#SubmitLogin').on('click', function(e) {
+			e.preventDefault();	
+			var username = $('#loginusername').val();
+			var password = $('#loginpassword').val();
+			//change this into alternative
+			$.ajax({
+				method: 'post',
+				data: {
+					username: username,
+					password: password
+				},
+				url: 'includes/login_handler.php',
+				success: function(response) {
+					alert(response);
+				}
+			});
+
+		});
+
 	}).exit(transition);
 
 	Path.map('#/add_student').to(function() {
