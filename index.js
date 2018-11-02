@@ -13,17 +13,35 @@ $.Mustache.load('template/template.html').done(function() {
 			var username = $('#loginusername').val();
 			var password = $('#loginpassword').val();
 			//change this into alternative
-			$.ajax({
-				method: 'post',
-				data: {
-					username: username,
-					password: password
-				},
-				url: 'includes/login_handler.php',
-				success: function(response) {
-					alert(response);
-				}
+
+			$.post('includes/login_handler.php',{username: username, password: password}, function(response) {
+					if(response == 'Please complete everything' || response == 'Please go to "Register Teacher"' || response == 'Incorrect Details') {
+						alert(response);
+						$('#loginusername').val('');
+						$('#loginpassword').val('');
+					}
+					else {
+						alert(response);
+					}
 			});
+			// $.ajax({
+			// 	method: 'post',
+			// 	data: {
+			// 		username: username,
+			// 		password: password
+			// 	},
+			// 	url: 'includes/login_handler.php',
+			// 	success: function(response) {
+			// 		if(response == 'Please enter something' || response == 'Please go to "Register Teacher"') {
+			// 			alert(response);
+			// 			$('#loginusername').val('');
+			// 			$('#loginpassword').val('');
+			// 		}
+			// 		else {
+			// 			alert(response);
+			// 		}
+			// 	}
+			// });
 
 		});
 
@@ -58,7 +76,15 @@ $.Mustache.load('template/template.html').done(function() {
 				},
 				url: 'includes/register_teacher.php',
 				success: function(response) {
-					alert(response)
+					if(response == 'Please complete all details' || response == 'Username already taken') {
+						alert(response);
+						$('#register_teacherfullname').val('');
+						$('#register_teacherusername').val('');
+						$('#register_teacherpassword').val('');
+					}
+					else {
+						alert(response);
+					}
 				}
 			});
 		});	
