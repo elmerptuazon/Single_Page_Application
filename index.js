@@ -6,44 +6,30 @@ $.Mustache.load('template/template.html').done(function() {
 	}
 
 	Path.map('#/login').to(function() {
-		$('#canvas').mustache('login');
+		if(localStorage.hasOwnProperty('Username') == true) {
+			window.location.href = '#/login_teacher';
+		}	
+		else {
+			$('#canvas').mustache('login');
+			$('#SubmitLogin').on('click', function(e) {
+				e.preventDefault();	
+				var username = $('#loginusername').val();
+				var password = $('#loginpassword').val();
+				$.post('includes/login_handler.php',{username: username, password: password}, function(response) {
+						if(response == 'Please complete everything' || response == 'Please go to "Register Teacher"' || response == 'Incorrect Details') {
+							alert(response);
+							$('#loginusername').val('');
+							$('#loginpassword').val('');
+						}
+						else {
+							alert(response);
+							localStorage.setItem('Username', username);
+							window.location.href= '#/login_teacher';
+						}
+				});
 
-		$('#SubmitLogin').on('click', function(e) {
-			e.preventDefault();	
-			var username = $('#loginusername').val();
-			var password = $('#loginpassword').val();
-			//change this into alternative
-
-			$.post('includes/login_handler.php',{username: username, password: password}, function(response) {
-					if(response == 'Please complete everything' || response == 'Please go to "Register Teacher"' || response == 'Incorrect Details') {
-						alert(response);
-						$('#loginusername').val('');
-						$('#loginpassword').val('');
-					}
-					else {
-						alert(response);
-					}
 			});
-			// $.ajax({
-			// 	method: 'post',
-			// 	data: {
-			// 		username: username,
-			// 		password: password
-			// 	},
-			// 	url: 'includes/login_handler.php',
-			// 	success: function(response) {
-			// 		if(response == 'Please enter something' || response == 'Please go to "Register Teacher"') {
-			// 			alert(response);
-			// 			$('#loginusername').val('');
-			// 			$('#loginpassword').val('');
-			// 		}
-			// 		else {
-			// 			alert(response);
-			// 		}
-			// 	}
-			// });
-
-		});
+		}
 
 	}).exit(transition);
 
@@ -61,12 +47,10 @@ $.Mustache.load('template/template.html').done(function() {
 
 		$('#SubmitRegisterTeacher').on('click', function(e) {
 			e.preventDefault();
-
 			var fullname = $('#register_teacherfullname').val();
 			var username = $('#register_teacherusername').val();
 			var password = $('#register_teacherpassword').val();
 			var id = $('#register_teacherid').val();
-
 			$.ajax({
 				method: 'post',
 				data: {
@@ -88,6 +72,38 @@ $.Mustache.load('template/template.html').done(function() {
 				}
 			});
 		});	
+	}).exit(transition);
+
+	Path.map('#/login_teacher').to(function() {
+		$('#header').empty();
+		$('#header').mustache('navbar_login_teacher');
+		$('#canvas').mustache('login_teacher');
+		var username = localStorage.getItem('Username');
+		$.get('includes/edit_profile_handler.php',{username: username}, function(response) {
+			var obj = JSON.parse(response);
+			$('#login_teacherfullname').val(obj.fullname);
+			$('#login_teacherusername').val(obj.username);
+			$('#login_teacherpassword').val(obj.password);
+			//global login credentials
+			window.obj = obj;
+		});
+		$('#SubmitLoginTeacher').on('click', function(e) {
+			e.preventDefault();
+			var fullname = $('#login_teacherfullname').val();
+			var username = $('#login_teacherusername').val();
+			var password = $('#login_teacherpassword').val();
+			$.post('includes/updated_profile.php',{fullname: fullname,username: username,password: password}, function(response) {
+				alert(response);
+			});
+		});
+				
+	}).exit(transition);
+
+	Path.map('#/logout_teacher').to(function() {
+		$('#header').empty();
+		$('#header').mustache('navbar');
+		$('#canvas').mustache('login');		
+		localStorage.removeItem('Username');
 	}).exit(transition);
 
 	Path.root('#/login')

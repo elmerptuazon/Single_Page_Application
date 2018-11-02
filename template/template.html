@@ -17,6 +17,22 @@
     </nav>
 </script>
 
+<script id="navbar_login_teacher" type="text/html">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-fixed-top">
+     	<a class="navbar-brand" href="#/logout_teacher" id="logout_teacher">Logout</a>
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	        <ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#/login_teacher" id="edit_teacher">Edit Profile</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="#/add_student" id="add_student">View Student</a>
+				</li>
+	        </ul>
+	    </div>
+    </nav>
+</script>
+
 
 <script id="login" type="text/html">
 	<form method="post">
@@ -35,15 +51,15 @@
 <script id="add_student" type="text/html">
 	<form method="post">
 		<div class="form-group">
-			<label>Fullname:</label>
+			<label>Student's Fullname:</label>
 			<input type="text" class="form-control" id="add_studentfullname" name="add_studentfullname">
 		</div>
 		<div class="form-group">
-			<label>Username:</label>
+			<label>Student's Username:</label>
 			<input type="text" class="form-control" id="add_studentusername" name="add_studentusername">
 		</div>
 		<div class="form-group">
-			<label>Password:</label>
+			<label>Student's Password:</label>
 			<input type="password" class="form-control" id="add_studentpassword" name="add_studentpassword">
 		</div>
 			<button type="submit" id="SubmitAddStudent" class="btn btn-default">Submit</button>
@@ -78,3 +94,20 @@
 	</form>
 </script>
 
+<script id="login_teacher" type="text/html">
+	<form method="POST">
+		<div class="form-group">
+			<label>Fullname:</label>
+			<input type="text" class="form-control" id="login_teacherfullname" name="login_teacherfullname">
+		</div>
+		<div class="form-group">
+			<label>Username:</label>
+			<input type="text" class="form-control" id="login_teacherusername" name="login_teacherusername">
+		</div>
+		<div class="form-group">
+			<label>Password:</label>
+			<input type="password" class="form-control" id="login_teacherpassword" name="login_teacherpassword">
+		</div>
+			<button type="submit" name='SubmitLoginTeacher' id="SubmitLoginTeacher" class="btn btn-default">Submit</button>
+	</form>
+</script>
