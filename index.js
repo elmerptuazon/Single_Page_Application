@@ -1,10 +1,10 @@
 $.Mustache.load('template/template.html').done(function() {
 	$('#header').mustache('navbar');
-
+	window.obj;
 	function transition() {
 		$('#canvas').empty();
 	}
-
+//****************LOGIN
 	Path.map('#/login').to(function() {
 		if(localStorage.hasOwnProperty('Username') == true) {
 			window.location.href = '#/login_teacher';
@@ -32,16 +32,32 @@ $.Mustache.load('template/template.html').done(function() {
 		}
 
 	}).exit(transition);
-
+//****************REGISTER STUDENT
 	Path.map('#/add_student').to(function() {
+		$('#header').empty();
+		$('#header').mustache('navbar_login_teacher');
 		$('#canvas').mustache('add_student');
+		if(performance.navigation.type == 1) { //check if browser refresh
+			window.location.href = '#/login_teacher';
+		}
+		$('#SubmitAddStudent').on('click', (e) => {
+			e.preventDefault();
+			var fullname = $('#add_studentfullname').val();
+			var username = $('#add_studentusername').val();
+			var password = $('#add_studentpassword').val();
+			var socket = new WebSocket('includes/student_handler/register_student.php');
+			console.log(socket.protocol);
+			// $.post('includes/student_handler/register_student.php',{fullname: fullname, username: username, password: password, teacher: window.obj['username']}, function(response) {
+			// 	alert(response);
+			// });
+		});
 		
 	}).exit(transition);
 
 	Path.map('#/delete_student').to(function() {
 		$('#canvas').mustache('delete_student');		
 	}).exit(transition);
-
+//****************REGISTER TEACHER ONLY
 	Path.map('#/register_teacher').to(function() {
 		$('#canvas').mustache('register_teacher');	
 
@@ -73,7 +89,7 @@ $.Mustache.load('template/template.html').done(function() {
 			});
 		});	
 	}).exit(transition);
-
+//****************TEACHER LOGIN
 	Path.map('#/login_teacher').to(function() {
 		$('#header').empty();
 		$('#header').mustache('navbar_login_teacher');
@@ -95,15 +111,15 @@ $.Mustache.load('template/template.html').done(function() {
 			$.post('includes/updated_profile.php',{fullname: fullname,username: username,password: password}, function(response) {
 				alert(response);
 			});
-		});
-				
+		});	
 	}).exit(transition);
-
+//****************LOGOUT
 	Path.map('#/logout_teacher').to(function() {
 		$('#header').empty();
-		$('#header').mustache('navbar');
-		$('#canvas').mustache('login');		
+		window.location.href= '#/login';		
 		localStorage.removeItem('Username');
+		window.obj = null;
+		window.location.reload();
 	}).exit(transition);
 
 	Path.root('#/login')
