@@ -3,12 +3,6 @@
      	<a class="navbar-brand" href="#/login" id="showTitle">Login</a>
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 	        <ul class="navbar-nav mr-auto">
-<!-- 			<li class="nav-item active">
-					<a class="nav-link" href="#/add_student" id="showAdd">Add Student</a>
-				</li>
-				<li class="nav-item active">
-					<a class="nav-link" href="#/delete_student" id="showUpdate">Delete</a>
-				</li> -->
 				<li class="nav-item active">
 					<a class="nav-link" href="#/register_teacher" id="showDelete">Register Teacher</a>
 				</li>
@@ -81,6 +75,63 @@
 		</tbody>
 	</table>
 
+	<button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" data-toggle="modal" data-target="#updateStudent">Update</button>
+	<button type="button" class="btn btn-outline-danger btn-sm m-0 waves-effect"  data-toggle="modal" data-target="#deleteStudent">Delete</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="updateStudent" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Update Student</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <form method="post">
+		      <div class="modal-body">
+						<div class="form-group">
+							<label>Student's Fullname:</label>
+							<input type="text" class="form-control" id="update_studentfullname" name="update_studentfullname">
+						</div>
+						<div class="form-group">
+							<label>Student's Username:</label>
+							<input type="text" class="form-control" id="update_studentusername" name="update_studentusername">
+						</div>
+						<div class="form-group">
+							<label>Student's Password:</label>
+							<input type="password" class="form-control" id="update_studentpassword" name="update_studentpassword">
+						</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" name="SubmitUpdateStudent" id="SubmitUpdateStudent">Update</button>
+		      </div>
+	  	</form>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="deleteStudent" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Delete Student</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <form method="post">
+		      <div class="modal-body">
+					<div class="form-group">
+						<label>Student's Username:</label>
+						<input type="text" class="form-control" id="delete_studentusername" name="delete_studentusername">
+					</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-danger" name="SubmitDeleteStudent" id="SubmitDeleteStudent">Delete</button>
+		      </div>
+	  	</form>
+	    </div>
+	  </div>
+	</div>
 
 	<form method="post">
 		<div class="form-group">
@@ -96,16 +147,6 @@
 			<input type="password" class="form-control" id="add_studentpassword" name="add_studentpassword">
 		</div>
 			<button type="submit" id="SubmitAddStudent" class="btn btn-default">Add Student</button>
-	</form>
-</script>
-
-<script id="delete_student" type="text/html">
-	<form method="post">
-		<div class="form-group">
-			<label>Username:</label>
-			<input type="text" class="form-control" id="delete_studentusername" name="delete_studentusername">
-		</div>
-			<button type="submit" id="SubmitDeleteStudent" class="btn btn-default">Submit</button>
 	</form>
 </script>
 

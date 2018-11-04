@@ -41,11 +41,16 @@ $.Mustache.load('template/template.html').done(function() {
 				window.location.href = '#/login_teacher';
 			}
 			$.get('includes/student_handler/show_student_list.php',{username: window.obj['username']}, function(response) {
-				$obj = JSON.parse(response);
-				for(var i = 0; i<obj.length;i++) {
+				var objs = JSON.parse(response);
+				var arrList = [];
+				for(var i = 0; i<objs.length;i++) {
 					if(i%2) {
-						// appendHere = "<tr><th scope='row'></th><td><button type='button' class='btn btn-outline-primary btn-sm m-0 waves-effect'>" + obj[i] +"</button></td><td>" + obj[i] + "</td></tr>";
-						alert(i);
+						if(objs[i-1] == undefined) {
+							alert('Please put username to ' + objs[i-1]);
+						}
+						arrList.push(objs[i-1]);
+						var appendHere = "<tr><th scope='row'></th><td>" + objs[i-1] +"</td><td>" + objs[i] + "</td><td></td></tr>";
+						$('#add_student_list_here').append(appendHere);
 					}
 				}
 			});
@@ -58,6 +63,22 @@ $.Mustache.load('template/template.html').done(function() {
 					alert(response);
 				});
 			});
+
+			$('#SubmitUpdateStudent').on('click', function() {
+				var fullname = $('#update_studentfullname').val();
+				var username = $('#update_studentusername').val();
+				var password = $('#update_studentpassword').val();
+				$.post('includes/updated_profile.php',{fullname: fullname,username: username,password: password}, function(response) {
+					alert(response);
+				});
+			});
+
+			$('#SubmitDeleteStudent').on('click', function() {
+				var username = $('#delete_studentusername').val();
+				$.post('includes/student_handler/delete_student.php',{username: username}, function(response) {
+					alert(response);
+				});
+			});
 		}
 		catch(err) {//at first refresh window.obj is not found
 			if (err instanceof TypeError) {}
@@ -65,9 +86,6 @@ $.Mustache.load('template/template.html').done(function() {
 			
 	}).exit(transition);
 
-	Path.map('#/delete_student').to(function() {
-		$('#canvas').mustache('delete_student');		
-	}).exit(transition);
 //****************REGISTER TEACHER ONLY
 	Path.map('#/register_teacher').to(function() {
 		$('#canvas').mustache('register_teacher');	

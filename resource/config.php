@@ -63,9 +63,21 @@ Class DbConnection {
 	}
 
 	function updated_profile($fullname, $username, $password) {
+		
 		$conn = mysqli_connect(DBHOST, DBUSER, DBPWD, DBNAME);
 		$sql = "UPDATE teacher SET fullname='$fullname', username='$username', password='$password' WHERE username='$username'";
-		mysqli_query($conn, $sql);
-		echo 'Updated Successful';
+		$student = "UPDATE student SET fullname='$fullname', username='$username', password='$password' WHERE username='$username'";
+		$result = mysqli_query($conn, $sql);
+		$res = mysqli_query($conn, $student);
+		$sel = "SELECT * FROM student WHERE username='$username'";
+		$selsql = mysqli_query($conn, $sel);
+		$resultCheck = mysqli_num_rows($selsql);
+		if($resultCheck >= 1) {
+			echo 'Updated Student Successful';
+		}		
+		elseif($result) {
+			mysqli_query($conn, $sql);
+			echo 'Updated Successful';
+		}
 	}
 }

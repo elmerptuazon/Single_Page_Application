@@ -18,7 +18,6 @@ else {
 	$resultCheck = mysqli_num_rows($result);
 	if($resultCheck > 0) {
 		echo 'Username already taken';
-		exit();
 	}
 	else {
 		//insert new data
