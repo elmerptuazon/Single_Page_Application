@@ -137,7 +137,7 @@ $.Mustache.load('template/template.html').done(function() {
 				var fullname = $('#login_teacherfullname').val();
 				var username = $('#login_teacherusername').val();
 				var password = $('#login_teacherpassword').val();
-				$.post('includes/updated_profile.php',{fullname: fullname,username: username,password: password}, function(response) {
+				fetch('includes/updated_profile.php',{fullname: fullname,username: username,password: password}, function(response) {
 					alert(response);
 				});
 			});
